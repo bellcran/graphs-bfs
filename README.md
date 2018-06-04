@@ -18,7 +18,7 @@
     g.setTerminalYn(new int[] {4, 5});
     ....
 
-** source
+** source 
 
   Graph with V = 8 , E = 9
   0: [1]
