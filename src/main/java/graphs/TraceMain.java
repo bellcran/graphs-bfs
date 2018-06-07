@@ -5,13 +5,13 @@ package graphs;
 
 import java.util.Iterator;
 
-public class BFSMain {
+public class TraceMain {
 
   public static void main(String args[])
   {
     // 0 ~ 6 까지 인덱스 번호가 부여된 노드를 만든다.
     int V = 7;
-    Graph g = new Graph(V); // 노드 인덱스는 0부터 시작
+    TraceGraph g = new TraceGraph(V); // 노드 인덱스는 0부터 시작
     
     // 노드에 유향그래프 속성을 부여한다. 
     g.addDirectedEdge(0, 1);
@@ -64,7 +64,7 @@ public class BFSMain {
     
     // 유향그래프를 만든다.
     V = 8;
-    g = new Graph(V);
+    g = new TraceGraph(V);
     g.addDirectedEdge(0, 1);
     g.addDirectedEdge(1, 2);
     g.addDirectedEdge(2, 3);
@@ -83,7 +83,8 @@ public class BFSMain {
 
     // 유향그래프를 시작노드(2)부터 말단노드까지 탐색(tracking)한다.
     BFS bfs = new BFS(g);
-    Graph bfsGraph = bfs.bfs(2);
+    bfs.execute(2);
+    TraceGraph bfsGraph = bfs.getTrace();
     
     // 탐색하기 전 유향그래프 출력 (원본)
     System.out.println("==> 유향그래프 탐색 결과 출력 (탐색노드, 거리, 선행노드)");

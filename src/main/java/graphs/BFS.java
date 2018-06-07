@@ -13,7 +13,8 @@ public class BFS {
   private Integer[] predecessors;
   private Integer[] distances;
 
-  private Graph graph;
+  private TraceGraph graph;
+  private TraceGraph trace; // 트레킹 결과값 저장
 
   boolean debug = false;
 
@@ -26,25 +27,25 @@ public class BFS {
    * 모든 노드를 방문하지 않은 것으로 표기한다.(디폴트 WHITE)
    * @param g
    */
-  public BFS(Graph g) {
+  public BFS(TraceGraph g) {
     graph = g;
     colors = new Color[g.getV()]; // 탐색여부
     predecessors = new Integer[g.getV()]; // 선행노드
     distances = new Integer[g.getV()]; // 거리
   }
+  
   /**
    * 너비우선순위 탐색을 수행한다.
    * @param source : 시작(출발)노드
-   * @return
    */
-  public Graph bfs(int source) {
+  public void execute(int source) {
     // 시작노드가 전체 노드의 범위를 벗어나면 예외를 발생시킨다. 
     // 노드 인덱스는 0부터 시작한다.
     if (source < 0 || source >= graph.getV()) {
       throw new IndexOutOfBoundsException();
     }
 
-    Graph g = new Graph(graph.getV());
+    TraceGraph g = new TraceGraph(graph.getV());
 
     for (int u = 0; u < graph.getV(); u++) {
       if (u != source) {
@@ -90,9 +91,17 @@ public class BFS {
       }
     }
 
-    return g;
+    this.trace = g;
   }
-
+  
+  /**
+   * tracing 결과값 리턴
+   * @return
+   */
+  public TraceGraph getTrace() {
+    return this.trace;
+  }
+  
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append(Arrays.toString(colors));

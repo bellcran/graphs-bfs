@@ -7,7 +7,7 @@ package graphs;
 import java.io.*;
 import java.util.*;
 
-class Graph {
+class TraceGraph {
   private int V; // 노드 수
   private int E = 0; // 연결(링크) 수
   private LinkedList<Integer> adj[]; // 인접성 리스트
@@ -16,7 +16,7 @@ class Graph {
   /**
    * 생성자 : 파라메터는 노드수를 의미한다
    */
-  Graph(int v) {
+  TraceGraph(int v) {
     V = v;
     adj = new LinkedList[v];
     terminalYn = new boolean[v];
@@ -121,7 +121,7 @@ class Graph {
 
     @Override
     public boolean hasNext() {
-      return (vertex < Graph.this.V);
+      return (vertex < TraceGraph.this.V);
     }
 
     @Override
