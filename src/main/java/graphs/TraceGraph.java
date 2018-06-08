@@ -8,10 +8,12 @@ import java.io.*;
 import java.util.*;
 
 class TraceGraph {
-  private int V; // 노드 수
+  private int V = 0; // 노드 수
   private int E = 0; // 연결(링크) 수
   private LinkedList<Integer> adj[]; // 인접성 리스트
   private boolean terminalYn[]; // 터미널노드 여부
+  private final Map<Integer, Vertex> vertexes; // 인접성 리스트
+  private final List<Edge> edges; 
 
   /**
    * 생성자 : 파라메터는 노드수를 의미한다
@@ -20,12 +22,49 @@ class TraceGraph {
     V = v;
     adj = new LinkedList[v];
     terminalYn = new boolean[v];
+    
+    this.vertexes = new HashMap<Integer, Vertex>();
+    
     for (int i = 0; i < v; ++i) {
-      adj[i] = new LinkedList();
+      vertexes.put(i, new Vertex("Node_"+i, i));
+      adj[i] = new LinkedList<Integer>();
       terminalYn[i] = false;
     }
+    
+    this.edges = new LinkedList<Edge>();
   }
 
+  TraceGraph(List<Edge> edges) {
+    // 링크 정보를 가지고 노드를 생성한다.
+    this.edges = edges;
+    this.vertexes = new HashMap<Integer, Vertex>();
+    this.adj = new LinkedList[edges.size()*2];
+    this.terminalYn = new boolean[edges.size()*2];
+
+    for (Edge edge: edges) {
+      Vertex source = edge.getSource();
+      Vertex destination = edge.getDestination();
+      int from = source.getIndex();
+      int to = destination.getIndex();
+      
+      terminalYn[from] = false;
+      terminalYn[to] = false;
+      
+      if (!vertexes.containsValue(source)) {
+        vertexes.put(from, source);
+        adj[from] = new LinkedList<Integer>();
+      }
+      if (!vertexes.containsValue(destination)) {
+        vertexes.put(to, destination);
+        adj[to] = new LinkedList<Integer>();
+      }
+      adj[from].add(to);
+    }
+    this.V = vertexes.size();
+    this.E = edges.size();
+    
+  }
+  
   /**
    * 유향 그래프 : 노드간에 방향과 연결(링크)을 설정하는 함수
    * @param from 시작점
@@ -35,6 +74,7 @@ class TraceGraph {
     if (!adj[from].contains(to)) {
       E++;
       adj[from].add(to);
+      this.edges.add(new Edge("Edge_"+from, from, to));
     }
   }
 
@@ -81,6 +121,10 @@ class TraceGraph {
     return adj[v];
   }
 
+  public List<Edge> getEdges() {
+    return edges;
+  }
+  
   /**
    * 터미널 노드를 셋팅한다.
    * @param v
@@ -91,6 +135,18 @@ class TraceGraph {
   public void setTerminalYn(int v[]) {
     for (int vval = 0; vval < v.length; vval++) 
       this.terminalYn[v[vval]] = true;
+  }
+  
+  public void setTerminalYn(Vertex v) {
+    this.terminalYn[v.getIndex()] = true;
+  }
+  public void setTerminalYn(Vertex v[]) {
+    for (int vval = 0; vval < v.length; vval++) 
+      this.terminalYn[v[vval].getIndex()] = true;
+  }
+  
+  public Vertex getVertex(int i) {
+    return this.vertexes.get(i);
   }
   
   /**

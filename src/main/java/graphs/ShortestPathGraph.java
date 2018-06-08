@@ -19,7 +19,7 @@ public class ShortestPathGraph {
   public ShortestPathGraph(List<Edge> edges) {
     this.edges = edges;
     
-    // create all nodes ready to be updated with the edges
+    // 링크 정보를 가지고 노드를 생성한다.
     this.vertexes = new HashMap<Integer, Vertex>();
 
     for (Edge edge: edges) {

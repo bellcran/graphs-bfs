@@ -31,6 +31,13 @@ public class Edge {
     this.weight = weight;
   }
 
+  public Edge(String id, int source, int destination) {
+    this.id = id;
+    this.source = new Vertex("Node_" + source, source);
+    this.destination = new Vertex("Node_" + destination, destination);
+    this.weight = 1;
+  }
+  
   public String getId() {
     return id;
   }

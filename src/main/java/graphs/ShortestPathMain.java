@@ -6,17 +6,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-
 public class ShortestPathMain {
 
-  private List<Vertex> nodes;
-  private List<Edge> edges;
-
-  @Test
-  public void testExcute() {
-
+  public static void main(String args[]) {
+    List<Vertex> nodes;
+    List<Edge> edges;
+    
     //nodes = new ArrayList<Vertex>();
     //for (int i = 0; i < 11; i++) {
     //  Vertex location = new Vertex("Node_" + i, i);
@@ -45,12 +40,12 @@ public class ShortestPathMain {
     dijkstra.execute(3);
     LinkedList<Vertex> path = dijkstra.getPath(10);
 
-    assertNotNull(path);
-    assertTrue(path.size() > 0);
+    //assertNotNull(path);
+    //assertTrue(path.size() > 0);
 
     for (Vertex vertex : path) {
-      System.out.print(vertex + " ");
-      System.out.println(dijkstra.getShortestDistance(vertex));
+      System.out.println(vertex + " ");
+      //System.out.println(dijkstra.getShortestDistance(vertex));
     }
 
   }

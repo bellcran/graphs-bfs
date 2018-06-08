@@ -5,6 +5,7 @@ package graphs;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 public class BFS {
@@ -45,7 +46,7 @@ public class BFS {
       throw new IndexOutOfBoundsException();
     }
 
-    TraceGraph g = new TraceGraph(graph.getV());
+    this.trace = new TraceGraph(graph.getV());
 
     for (int u = 0; u < graph.getV(); u++) {
       if (u != source) {
@@ -79,7 +80,7 @@ public class BFS {
             q.add(v);
             
             // 결과(리턴)값에 유향그래프로 저장한다. 
-            g.addDirectedEdge(u, v);
+            this.trace.addDirectedEdge(u, v);
           }
         }
 
@@ -90,17 +91,36 @@ public class BFS {
         
       }
     }
-
-    this.trace = g;
   }
   
   /**
    * tracing 결과값 리턴
    * @return
    */
-  public TraceGraph getTrace() {
+  public TraceGraph getGraph() {
     return this.trace;
   }
+  
+  
+  public List<Edge> getPath() {
+    /*LinkedList<Edge> path = new LinkedList<Edge>();
+    LinkedList<Integer> adjs[] = this.trace.getAdj();
+    
+    for (int i = 0 ; i < adjs.length; i++) {
+      
+      if (adjs[i].size() != 0) {
+        
+        for (int j : adjs[i])  path.add(new Edge("Edge_"+i, i, j));
+            
+      }
+      
+    }
+    
+    return path;
+    */
+    return this.trace.getEdges();
+  }
+
   
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -136,11 +156,4 @@ public class BFS {
   public Integer[] getDistances() {
     return distances;
   }
-
-  /*
-  public static void main(String[] args) {
-
-  }
-
-  */
 }
