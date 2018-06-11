@@ -37,9 +37,12 @@ public class ShortestPathMain {
     dijkstra.execute(3);
     // 지정노드까지 최단경로를 구하여 출력 (노드정보)
     LinkedList<Vertex> path = dijkstra.getPath(10);
-
+    
+    graph.print();
+    
+    System.out.println("==> 지정노드까지 최단경로 출력 (노드정보)");
     for (Vertex vertex : path) {
-      System.out.println(vertex + " ");
+      System.out.print(vertex + " -> ");
       //System.out.println(dijkstra.getShortestDistance(vertex));
     }
 

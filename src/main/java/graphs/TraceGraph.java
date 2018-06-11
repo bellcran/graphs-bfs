@@ -133,6 +133,14 @@ class TraceGraph {
   public List<Edge> getEdges() {
     return edges;
   }
+
+  /**
+   * 모든 노드 정보를 가져온다.
+   * @return
+   */
+  public Map<Integer, Vertex> getVertexes() {
+    return this.vertexes;
+  }
   
   /**
    * 인덱스값을 사용하여 하나의 노드를 터미널 노드로 셋팅한다.
@@ -186,7 +194,46 @@ class TraceGraph {
     Iterator itrE = iterateEdges(v);
     return !itrE.hasNext() || this.terminalYn[v];
   }  
-    
+
+  public void print() {
+    Map<String, GraphPrint> tn = new HashMap<>();
+    for (int i = 0; i < this.vertexes.size(); i++) {
+      if (adj[i] != null && adj[i].size() != 0) {
+        String key = vertexes.get(i).getId();
+        
+        GraphPrint parent = null;
+        if (!tn.containsKey(key)) {
+          parent = new GraphPrint(key, true);
+          tn.put(key, parent);
+        } else {
+          parent = tn.get(key);
+        }
+        /*for (int j=0; j<adj[i].size(); j++) {
+          String childKey = vertexes.get(adj[i].get(j)).getId();
+          GraphPrint child = new GraphPrint(childKey, false);
+          parent.addChild(child);
+          tn.put(childKey, child);
+        }*/
+        
+        for (int j=0; j<adj[i].size(); j++) {
+          String childKey = vertexes.get(adj[i].get(j)).getId();
+          
+          GraphPrint child = null;
+          if (!tn.containsKey(childKey)) {
+            child = new GraphPrint(childKey, true);
+            tn.put(childKey, child);
+          } else {
+            child = tn.get(childKey);
+          }          
+          parent.addChild(child);
+        }
+      }
+    }
+    tn.get(vertexes.get(0).getId()).print();
+    System.out.println();
+  }
+  
+  
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
@@ -239,3 +286,6 @@ class TraceGraph {
   }
 
 }
+
+
+

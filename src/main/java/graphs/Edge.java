@@ -71,7 +71,7 @@ public class Edge {
 
   @Override
   public String toString() {
-    return source + " " + destination;
+    return source + "-" + destination;
   }
 
 }
