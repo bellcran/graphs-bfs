@@ -71,9 +71,16 @@ public class ShortestPathGraph {
       adj[from].add(to);
     }
     
-    for(int j = 0; j < this.predecessors.length; j++) {
-      this.predecessors[j] = null;
-      for(int k=0; k<adj[j].size(); k++) ch.get(kk);
+    this.predecessors = new Integer[adj.length];
+    for(int j = 0; j < adj.length; j++) {
+      this.predecessors[j] = -1;
+    }
+    
+    for(int j = 0; j < adj.length; j++) {
+      for(int k=0; k<adj[j].size(); k++) {
+        int ch = adj[j].get(k);
+        this.predecessors[ch] = j;
+      }
     }
   }
   
@@ -101,14 +108,17 @@ public class ShortestPathGraph {
             tn.put(childKey, child);
           } else {
             child = tn.get(childKey);
-          }          
+          }
           parent.addChild(child);
         }
       }
     }
-    tn.get(vertexes.get(0).getId()).print();
     
-    //for (int val : this.predecessors) System.out.println(val);
+    int ii = 0;
+    for (int val : this.predecessors) {
+      if (val == -1) tn.get(vertexes.get(ii).getId()).print();
+      ii++;
+    }
 
     System.out.println();
   }

@@ -31,7 +31,7 @@ public class GraphPrint {
   }
 
   private void print(String prefix, boolean isTail) {
-    System.out.println(prefix + (isTail ? "└── " : "├── ") + name + " size:" + children.size());
+    System.out.println(prefix + (isTail ? "└── " : "├── ") + name);
     for (int i = 0; i < children.size() - 1; i++) {
       children.get(i).print(prefix + (isTail ? "    " : "│   "), false);
     }

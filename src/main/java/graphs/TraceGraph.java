@@ -14,7 +14,9 @@ class TraceGraph {
   private boolean terminalYn[]; // 터미널노드 여부
   private final Map<Integer, Vertex> vertexes; // 노드 저장소
   private final List<Edge> edges; // 링크 저장소
-
+  private Integer predecessors[]; // 부모노드 저장소
+  private final int max; // 노드인덱스 최대값, 루프문 반복횟수
+  
   /**
    * 총 노드수를 가지고 탐색에 사용할 그래프를 생성한다.
    * 노드 인덱스값과 배열의 인덱스값은 같다.
@@ -34,6 +36,7 @@ class TraceGraph {
     }
     
     this.edges = new LinkedList<Edge>();
+    this.max = v;
   }
 
   /**
@@ -44,9 +47,11 @@ class TraceGraph {
     // 링크 정보를 가지고 노드를 생성한다.
     this.edges = edges;
     this.vertexes = new HashMap<Integer, Vertex>();
-    this.adj = new LinkedList[edges.size()*2];
-    this.terminalYn = new boolean[edges.size()*2];
 
+    this.max = getMaxVertex(edges);
+    this.terminalYn = new boolean[max+1];
+    this.adj = new LinkedList[max+1];
+    
     for (Edge edge: edges) {
       Vertex source = edge.getSource();
       Vertex destination = edge.getDestination();
@@ -68,6 +73,36 @@ class TraceGraph {
     }
     this.V = vertexes.size();
     this.E = edges.size();
+    
+    this.predecessors = new Integer[adj.length];
+    for(int j = 0; j < adj.length; j++) {
+      this.predecessors[j] = -1;
+    }
+    
+    for(int j = 0; j < adj.length; j++) {
+      
+      if (adj[j] != null) {
+        for(int k=0; k<adj[j].size(); k++) {
+          int ch = adj[j].get(k);
+          this.predecessors[ch] = j;
+        }
+      }
+    }
+  }
+  
+  private int getMaxVertex(List<Edge> eds) {
+    int max = -1;
+    for (Edge ed: eds) {
+      Vertex source = ed.getSource();
+      Vertex destination = ed.getDestination();
+      int from = source.getIndex();
+      int to = destination.getIndex();
+      
+      if (from > max) max = from;
+      if (to > max) max = to;
+    }
+    
+    return max;
   }
   
   /**
@@ -197,7 +232,7 @@ class TraceGraph {
 
   public void print() {
     Map<String, GraphPrint> tn = new HashMap<>();
-    for (int i = 0; i < this.vertexes.size(); i++) {
+    for (int i = 0; i < this.max; i++) {
       if (adj[i] != null && adj[i].size() != 0) {
         String key = vertexes.get(i).getId();
         
@@ -229,16 +264,21 @@ class TraceGraph {
         }
       }
     }
-    tn.get(vertexes.get(0).getId()).print();
+    
+    int ii = 0;
+    for (int val : this.predecessors) {
+      if (val == -1 && vertexes.get(ii) != null) tn.get(vertexes.get(ii).getId()).print();
+      ii++;
+    }
+    
     System.out.println();
   }
-  
   
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Graph with V = " + V + " , E = " + E + "\n");
-    for (int i = 0; i < this.getV(); i++) {
+    for (int i = 0; i < this.max; i++) {
       sb.append(i + ": ");
       sb.append(adj[i]);
       sb.append("\n");

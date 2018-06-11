@@ -15,6 +15,7 @@ public class TraceMain {
     // 링크 정보를 생성한다.
     List<Edge> edges = new ArrayList<Edge>();
 
+    
     edges.add(new Edge("Edge_0", 0, 1));
     edges.add(new Edge("Edge_1", 1, 2));
     edges.add(new Edge("Edge_2", 2, 3));
@@ -24,17 +25,23 @@ public class TraceMain {
     edges.add(new Edge("Edge_6", 5, 6));
     edges.add(new Edge("Edge_7", 4, 7));
     edges.add(new Edge("Edge_8", 6, 7));
-
+    
+    
     /*
-     * edges.add(new Edge("Edge_0", 0, 1, 85)); edges.add(new Edge("Edge_1", 0, 2,
-     * 217)); edges.add(new Edge("Edge_2", 0, 4, 173)); edges.add(new Edge("Edge_3",
-     * 2, 6, 186)); edges.add(new Edge("Edge_4", 2, 7, 103)); edges.add(new
-     * Edge("Edge_5", 3, 7, 183)); edges.add(new Edge("Edge_6", 5, 8, 250));
-     * edges.add(new Edge("Edge_7", 8, 9, 84)); edges.add(new Edge("Edge_8", 7, 9,
-     * 167)); edges.add(new Edge("Edge_9", 4, 9, 502)); edges.add(new
-     * Edge("Edge_10",9, 10, 40)); edges.add(new Edge("Edge_11",1, 10, 600));
-     */
-
+    edges.add(new Edge("Edge_0", 0, 1, 85)); 
+    edges.add(new Edge("Edge_1", 0, 2, 217)); 
+    edges.add(new Edge("Edge_2", 0, 4, 173)); 
+    edges.add(new Edge("Edge_3", 2, 6, 186)); 
+    edges.add(new Edge("Edge_4", 2, 7, 103)); 
+    edges.add(new Edge("Edge_5", 3, 7, 183)); 
+    edges.add(new Edge("Edge_6", 5, 8, 250));
+    edges.add(new Edge("Edge_7", 8, 9, 84)); 
+    edges.add(new Edge("Edge_8", 7, 9, 167)); 
+    edges.add(new Edge("Edge_9", 4, 9, 502)); 
+    edges.add(new Edge("Edge_10",9, 10, 40)); 
+    edges.add(new Edge("Edge_11",1, 10, 600));
+    */
+    
     // 링크정보를 가지고 탐색을 적용하기 위한 그래프를 생성한다.
     TraceGraph g = new TraceGraph(edges);
 
@@ -48,7 +55,7 @@ public class TraceMain {
     BFS bfs = new BFS(g);
     // 시작노드(2)부터 말단노드까지 탐색(tracking)한다.
     bfs.execute(2);
-    // bfs.execute(3);
+    //bfs.execute(3);
 
     // 탐색이 끝난 유향그래프를 얻는다.
     // TraceGraph bfsGraph = bfs.getGraph();
@@ -64,7 +71,9 @@ public class TraceMain {
       System.out.println(edge);
     }
     System.out.println();
-
+    
+    TraceGraph tg = new TraceGraph(path);
+    tg.print();
 
     // 기타 함수 테스트
 
