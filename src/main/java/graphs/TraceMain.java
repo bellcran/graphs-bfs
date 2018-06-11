@@ -12,12 +12,8 @@ public class TraceMain {
 
   public static void main(String args[])
   {
-    // 0 ~ 6 까지 인덱스 번호가 부여된 노드를 만든다.
-    int V = 7;
-    TraceGraph g = new TraceGraph(V); // 노드 인덱스는 0부터 시작
-    
+    // 링크 정보를 생성한다.
     List<Edge> edges = new ArrayList<Edge>();
-    
     
     edges.add(new Edge("Edge_0", 0, 1));
     edges.add(new Edge("Edge_1", 1, 2));
@@ -45,7 +41,8 @@ public class TraceMain {
     edges.add(new Edge("Edge_11",1, 10, 600));
     */
     
-    g = new TraceGraph(edges);
+    // 링크정보를 가지고 탐색을 적용하기 위한 그래프를 생성한다.
+    TraceGraph g = new TraceGraph(edges);
     
     // 터미널노드를 셋팅한다.
     //g.setTerminalYn(new Vertex[] {g.getVertex(4), g.getVertex(5)});
@@ -53,14 +50,17 @@ public class TraceMain {
     //System.out.println("==> 유향그래프 원본 출력");
     //System.out.println(g);
 
-    // 유향그래프를 시작노드(2)부터 말단노드까지 탐색(tracking)한다.
+    // 유향그래프에 탐색로직(BFS)을 적용한다. 
     BFS bfs = new BFS(g);
-    //bfs.execute(3);
+    // 시작노드(2)부터 말단노드까지 탐색(tracking)한다.
     bfs.execute(2);
-    TraceGraph bfsGraph = bfs.getGraph();
+    //bfs.execute(3);
     
-    // 탐색이 끝난 링크 (tracking 경로) 출력
-    System.out.println("==> 탐색이 끝난 경로 출력");
+    // 탐색이 끝난 유향그래프를 얻는다.
+    //TraceGraph bfsGraph = bfs.getGraph();
+    
+    // 탐색이 끝난 경로 (tracking 경로) 출력 (링크정보)
+    System.out.println("==> 탐색이 끝난 경로 출력 (링크정보)");
     List<Edge> path = bfs.getPath();
     
     for (Edge edge : path) {
@@ -68,6 +68,8 @@ public class TraceMain {
     }
     System.out.println();
 
+    
+    
     // 기타 함수 테스트
     
     // 유향그래프 탐색 결과 출력 (탐색노드, 거리, 선행노드)
@@ -81,6 +83,9 @@ public class TraceMain {
     //for (Object val : bfs.getDistances()) System.out.println(val);
 
     /*
+    int V = 7;
+    g = new TraceGraph(V); // 노드 인덱스는 0부터 시작
+
     // 노드에 유향그래프 속성을 부여한다. 
     g.addDirectedEdge(0, 1);
     g.addDirectedEdge(0, 2);
@@ -89,8 +94,7 @@ public class TraceMain {
     g.addDirectedEdge(2, 5);
     g.addDirectedEdge(4, 6);
     
-    g.setTerminalYn(new int[] {4}); // terminalYn 을 true 로 셋팅하거나 
-                                    // 유향그래프에서 인접노드가 없을 경우 말단노드
+    g.setTerminalYn(new int[] {4}); // terminalYn 을 true 로 셋팅하거나 유향그래프에서 인접노드가 없을 경우 말단노드
 
     System.out.print("==> 노드 2의 인접노드: ");
     System.out.println(g.getAdj(2)); // 노드2와 연결된 인접노드 목록을 출력한다.
@@ -109,7 +113,6 @@ public class TraceMain {
         while (itrE.hasNext()) {
           System.out.print(itrE.next()+" ");
         }
-        
         System.out.println("\n");
 
       } else {
@@ -117,9 +120,7 @@ public class TraceMain {
       }
 
     }
-    */
-    
-    /*
+
     V = 4;
     g = new Graph(V);
     
@@ -129,9 +130,7 @@ public class TraceMain {
     g.addDirectedEdge(2, 0);
     g.addDirectedEdge(2, 3);
     g.addDirectedEdge(3, 3);
-    */
     
-    /*
     // 유향그래프를 만든다.
     V = 8;
     g = new TraceGraph(V);

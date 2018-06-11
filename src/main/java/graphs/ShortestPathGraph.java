@@ -11,11 +11,20 @@ public class ShortestPathGraph {
   private final Map<Integer, Vertex> vertexes;
   private final List<Edge> edges;
 
+  /**
+   * 노드와 링크정보를 가지고 최단경로 탐색 관련 그래프를 생성한다.
+   * @param vertexes
+   * @param edges
+   */
   public ShortestPathGraph(Map<Integer, Vertex> vertexes, List<Edge> edges) {
     this.vertexes = vertexes;
     this.edges = edges;
   }
 
+  /**
+   * 링크정보를 가지고 최단경로 탐색 관련 그래프를 생성한다.
+   * @param edges
+   */
   public ShortestPathGraph(List<Edge> edges) {
     this.edges = edges;
     

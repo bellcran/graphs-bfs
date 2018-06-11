@@ -16,10 +16,10 @@ public class Dijkstra {
 
   private final Map<Integer, Vertex> nodes;
   private final List<Edge> edges;
-  private Set<Vertex> settledNodes;
-  private Set<Vertex> unSettledNodes;
-  private Map<Vertex, Vertex> predecessors;
-  private Map<Vertex, Integer> distance;
+  private Set<Vertex> settledNodes; // 방문노드 집합
+  private Set<Vertex> unSettledNodes; // 비방문노드 집합
+  private Map<Vertex, Vertex> predecessors; // 부모노드 저장소
+  private Map<Vertex, Integer> distance; // 해당노드까지 거리값
 
   /**
    * 다익스트라 알고리즘에 사용되는 노드, 링크 초기화
@@ -32,10 +32,18 @@ public class Dijkstra {
     this.edges = new ArrayList<Edge>(graph.getEdges());
   }
 
+  /**
+   * 시작노드에서 하위노드까지의 거리계산
+   * @param source : 시작노드의 인덱스값
+   */
   public void execute(int source) {
     execute(nodes.get(source));
   }
 
+  /**
+   * 시작노드에서 하위노드까지의 거리계산
+   * @param source : 시작노드(vertex)
+   */
   public void execute(Vertex source) {
     settledNodes = new HashSet<Vertex>();
     unSettledNodes = new HashSet<Vertex>();
@@ -51,6 +59,10 @@ public class Dijkstra {
     }
   }
 
+  /*
+   * 해당노드에서 가장 가까운 인접노드 찾기, 거리계산  
+   * @param node
+   */
   private void findMinimalDistances(Vertex node) {
     List<Vertex> adjacentNodes = getNeighbors(node);
     for (Vertex target : adjacentNodes) {
@@ -63,6 +75,9 @@ public class Dijkstra {
 
   }
 
+  /*
+   * 링크로부터 저장된 거리값 가져오기
+   */
   private int getDistance(Vertex node, Vertex target) {
     for (Edge edge : edges) {
       if (edge.getSource().equals(node) && edge.getDestination().equals(target)) {
@@ -72,6 +87,9 @@ public class Dijkstra {
     throw new RuntimeException("Should not happen");
   }
 
+  /*
+   * 해당노드의 모든 인접노드 가져오기
+   */
   private List<Vertex> getNeighbors(Vertex node) {
     List<Vertex> neighbors = new ArrayList<Vertex>();
     for (Edge edge : edges) {
@@ -82,6 +100,9 @@ public class Dijkstra {
     return neighbors;
   }
 
+  /*
+   * 가장 가까운 거리에 있는 노드 가져오기
+   */
   private Vertex getMinimum(Set<Vertex> vertexes) {
     Vertex minimum = null;
     for (Vertex vertex : vertexes) {
@@ -109,14 +130,15 @@ public class Dijkstra {
     }
   }
 
-  /*
-   * This method returns the path from the source to the selected target and NULL
-   * if no path exists
+  /**
+   * 소스에서 선택한 대상까지의 경로를 반환하고, 경로가 없으면 NULL을 반환한다.
+   * @param target : 끝노드(vertex)
+   * @return
    */
   public LinkedList<Vertex> getPath(Vertex target) {
     LinkedList<Vertex> path = new LinkedList<Vertex>();
     Vertex step = target;
-    // check if a path exists
+    // 링크가 존재하는지 체크한다.
     if (predecessors.get(step) == null) {
       return null;
     }
@@ -125,11 +147,16 @@ public class Dijkstra {
       step = predecessors.get(step);
       path.add(step);
     }
-    // Put it into the correct order
+    // 올바른 순서로 바꾼다.
     Collections.reverse(path);
     return path;
   }
-
+  
+  /**
+   * 소스에서 선택한 대상까지의 경로를 반환하고, 경로가 없으면 NULL을 반환한다.
+   * @param target : 끝노드의 인덱스값
+   * @return
+   */
   public LinkedList<Vertex> getPath(int target) {
     return getPath(nodes.get(target));
   }

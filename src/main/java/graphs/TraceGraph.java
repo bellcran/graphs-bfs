@@ -1,6 +1,6 @@
 /**
- *  유향그래프, 무향그래프 관련 클래스(Undirect, Direct Graph)
- * 
+ * 탐색 관련 그래프 정의
+ * 유향그래프, 무향그래프 관련 클래스(Undirect, Direct Graph)
  */
 package graphs;
 
@@ -10,13 +10,15 @@ import java.util.*;
 class TraceGraph {
   private int V = 0; // 노드 수
   private int E = 0; // 연결(링크) 수
-  private LinkedList<Integer> adj[]; // 인접성 리스트
+  private LinkedList<Integer> adj[]; // 인접노드 리스트
   private boolean terminalYn[]; // 터미널노드 여부
-  private final Map<Integer, Vertex> vertexes; // 인접성 리스트
-  private final List<Edge> edges; 
+  private final Map<Integer, Vertex> vertexes; // 노드 저장소
+  private final List<Edge> edges; // 링크 저장소
 
   /**
-   * 생성자 : 파라메터는 노드수를 의미한다
+   * 총 노드수를 가지고 탐색에 사용할 그래프를 생성한다.
+   * 노드 인덱스값과 배열의 인덱스값은 같다.
+   * @param v : 전체 노드 수
    */
   TraceGraph(int v) {
     V = v;
@@ -34,6 +36,10 @@ class TraceGraph {
     this.edges = new LinkedList<Edge>();
   }
 
+  /**
+   * 링크를 가지고 탐색에 사용할 그래프를 생성한다.
+   * @param edges
+   */
   TraceGraph(List<Edge> edges) {
     // 링크 정보를 가지고 노드를 생성한다.
     this.edges = edges;
@@ -62,7 +68,6 @@ class TraceGraph {
     }
     this.V = vertexes.size();
     this.E = edges.size();
-    
   }
   
   /**
@@ -121,36 +126,59 @@ class TraceGraph {
     return adj[v];
   }
 
+  /**
+   * 모든 링크 정보를 가져온다.
+   * @return
+   */
   public List<Edge> getEdges() {
     return edges;
   }
   
   /**
-   * 터미널 노드를 셋팅한다.
+   * 인덱스값을 사용하여 하나의 노드를 터미널 노드로 셋팅한다.
    * @param v
    */
   public void setTerminalYn(int v) {
     this.terminalYn[v] = true;
   }
+  
+  /**
+   * 인덱스값 배열을 사용하여 여러 개의 노드를 터미널 노드로 셋팅한다.
+   * @param v
+   */
   public void setTerminalYn(int v[]) {
     for (int vval = 0; vval < v.length; vval++) 
       this.terminalYn[v[vval]] = true;
   }
   
+  /**
+   * 하나의 노드를 터미널 노드로 셋팅한다.
+   * @param v
+   */
   public void setTerminalYn(Vertex v) {
     this.terminalYn[v.getIndex()] = true;
   }
+
+  /**
+   * 여러 개의 노드를 터미널 노드로 셋팅한다.
+   * @param v
+   */
   public void setTerminalYn(Vertex v[]) {
     for (int vval = 0; vval < v.length; vval++) 
       this.terminalYn[v[vval].getIndex()] = true;
   }
   
+  /**
+   * 인덱스값에 해당하는 노드를 가져온다.
+   * @param i
+   * @return
+   */
   public Vertex getVertex(int i) {
     return this.vertexes.get(i);
   }
   
   /**
-   * 유향그래프에서 인접노드가 없거나, terminalYn 이 true 인 경우 터미널(말단)노드
+   * 유향그래프에서 인접노드가 없거나, terminalYn 이 true 인 경우 터미널(말단)노드이다.
    * @param v
    * @return
    */

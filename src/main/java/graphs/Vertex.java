@@ -8,7 +8,7 @@ public class Vertex {
   final private int index;
 
   /**
-   * 노드 초기화
+   * 노드 이름과 인덱스로 노드를 생성한다.
    * @param id
    * @param name
    */
@@ -52,7 +52,7 @@ public class Vertex {
 
   @Override
   public String toString() {
-      return id;
+      return id + "(" + index + ")";
   }
 
 }

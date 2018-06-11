@@ -10,22 +10,23 @@ import java.util.Queue;
 
 public class BFS {
 
-  private Color[] colors;
-  private Integer[] predecessors;
-  private Integer[] distances;
+  private Color[] colors; // 방문여부 저장
+  private Integer[] predecessors; // 자신의 부모노드
+  private Integer[] distances; // 해당 노드까지의 거리
 
   private TraceGraph graph;
   private TraceGraph trace; // 트레킹 결과값 저장
 
   boolean debug = false;
 
-  public enum Color {//미탐색 노드는 하얀색, 탐색한 노드는 검은색으로 표기한다. 
+  public enum Color {//미탐색 노드는 하얀색, 탐색 노드는 검은색으로 표기한다. 
     WHITE, GRAY, BLACK;
   }
 
   /**
    * 그래프를 입력받아 탐색여부, 거리, 선행노드 관련 배열을 초기화한다.
    * 모든 노드를 방문하지 않은 것으로 표기한다.(디폴트 WHITE)
+   * 배열의 인덱스와 노드의 인덱스는 같다.   * 
    * @param g
    */
   public BFS(TraceGraph g) {
@@ -94,26 +95,26 @@ public class BFS {
   }
   
   /**
-   * tracing 결과값 리턴
+   * tracing 결과를 그래프 형태로 리턴한다.
    * @return
    */
   public TraceGraph getGraph() {
     return this.trace;
   }
   
-  
+  /**
+   * tracing 결과를 링크(시작노드-끝노드)의 배열값으로 리턴한다.  
+   * @return
+   */
   public List<Edge> getPath() {
     /*LinkedList<Edge> path = new LinkedList<Edge>();
     LinkedList<Integer> adjs[] = this.trace.getAdj();
     
     for (int i = 0 ; i < adjs.length; i++) {
-      
       if (adjs[i].size() != 0) {
         
         for (int j : adjs[i])  path.add(new Edge("Edge_"+i, i, j));
-            
       }
-      
     }
     
     return path;

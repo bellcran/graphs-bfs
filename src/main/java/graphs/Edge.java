@@ -10,12 +10,12 @@ public class Edge {
   private final int weight; // 거리, 가중값
 
   /**
-   * 링크 초기화
+   * 시작노드와 끝노드를 가지고 링크를 생성한다.
    * 
    * @param id
-   * @param source
-   * @param destination
-   * @param weight
+   * @param source 시작노드
+   * @param destination 끝노드
+   * @param weight 거리
    */
   public Edge(String id, Vertex source, Vertex destination, int weight) {
     this.id = id;
@@ -24,6 +24,14 @@ public class Edge {
     this.weight = weight;
   }
 
+  /**
+   * 노드의 인덱스값으로 링크를 생성한다.
+   * 
+   * @param id
+   * @param source 시작노드의 인덱스값
+   * @param destination 끝노드의 인덱스값
+   * @param weight 거리
+   */
   public Edge(String id, int source, int destination, int weight) {
     this.id = id;
     this.source = new Vertex("Node_" + source, source);
@@ -31,6 +39,13 @@ public class Edge {
     this.weight = weight;
   }
 
+  /**
+   * 거리값이 존재하지 않는 링크를 생성한다.
+   * 
+   * @param id
+   * @param source 시작노드의 인덱스값
+   * @param destination 끝노드의 인덱스값
+   */
   public Edge(String id, int source, int destination) {
     this.id = id;
     this.source = new Vertex("Node_" + source, source);

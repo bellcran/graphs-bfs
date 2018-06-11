@@ -1,3 +1,6 @@
+/**
+ * 최단거리 탐색 테스트
+ */
 package graphs;
 
 import java.util.ArrayList;
@@ -9,16 +12,9 @@ import org.junit.Test;
 public class ShortestPathMain {
 
   public static void main(String args[]) {
-    List<Vertex> nodes;
-    List<Edge> edges;
     
-    //nodes = new ArrayList<Vertex>();
-    //for (int i = 0; i < 11; i++) {
-    //  Vertex location = new Vertex("Node_" + i, i);
-    //  nodes.add(location);
-    //}
-    
-    edges = new ArrayList<Edge>();
+    // 링크정보를 생성한다.
+    List<Edge> edges = new ArrayList<Edge>();
     
     edges.add(new Edge("Edge_0", 0, 1, 85));
     edges.add(new Edge("Edge_1", 0, 2, 217));
@@ -33,15 +29,14 @@ public class ShortestPathMain {
     edges.add(new Edge("Edge_10",9, 10, 40));
     edges.add(new Edge("Edge_11",1, 10, 600));
     
-    // Lets check from location Loc_1 to Loc_10
-    //ShortestPathGraph graph = new ShortestPathGraph(nodes, edges);
+    // 최단거리 탐색을 위한 그래프를 생성한다.
     ShortestPathGraph graph = new ShortestPathGraph(edges);
+    // 그래프에 최단거리 분석 로직을 적용한다.
     Dijkstra dijkstra = new Dijkstra(graph);
+    // 시작노드를 설정해서 거리를 구한다.
     dijkstra.execute(3);
+    // 지정노드까지 최단경로를 구하여 출력 (노드정보)
     LinkedList<Vertex> path = dijkstra.getPath(10);
-
-    //assertNotNull(path);
-    //assertTrue(path.size() > 0);
 
     for (Vertex vertex : path) {
       System.out.println(vertex + " ");
