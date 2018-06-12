@@ -33,17 +33,15 @@ g.setTerminalYn(new int[] {4, 5});
 ### 유향그래프에 탐색로직(BFS) 적용
 ```
 BFS bfs = new BFS(g);
-bfs.execute(2);
+bfs.execute(2); //시작노드
 ```
 
 ### 원본노드출력(이진트리형태)
 ```
 g.print();
-
 ```
 **[result]**
 ```
-
 └── Node_0
     └── Node_1
         └── Node_2
@@ -62,11 +60,9 @@ g.print();
 List<Edge> path = bfs.getPath();
 TraceGraph tg = new TraceGraph(path);
 tg.print();
-
 ```
 **[result]**
 ```
-
 └── Node_2
     └── Node_3
         ├── Node_4
@@ -78,11 +74,9 @@ for (Edge edge : path) {
   System.out.println(edge);
 }
 System.out.println();
-
 ```
 **[result]**
 ```
-
 Node_2(2)-Node_3(3)
 Node_3(3)-Node_4(4)
 Node_3(3)-Node_5(5)
@@ -133,11 +127,9 @@ LinkedList<Vertex> path = dijkstra.getPath(10); //끝노드
 ### 원본노드출력(이진트리형태)
 ```
 graph.print();
-
 ```
 **[result]**
 ```
-
 └── Node_0
     ├── Node_1
     │   └── Node_10
