@@ -46,7 +46,7 @@ public class TraceMain {
     TraceGraph g = new TraceGraph(edges);
 
     // 터미널노드를 셋팅한다.
-    //g.setTerminalYn(new Vertex[] {g.getVertex(4), g.getVertex(5)});
+    g.setTerminalYn(new Vertex[] {g.getVertex(4), g.getVertex(5)});
 
     // 유향그래프에 탐색로직(BFS)을 적용한다.
     BFS bfs = new BFS(g);
