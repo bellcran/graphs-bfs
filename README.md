@@ -11,7 +11,7 @@
                     |    ↓    ↑
                     +--> 5 -> 6
                  
-2) 4, 5 노드를 터미널노드로 셋팅 
+2) 4, 5 노드를 터미널노드로 셋팅
     ....
-    g.setTerminalYn(new int[] {4, 5}); 
+    g.setTerminalYn(new int[] {4, 5});
     ....
