@@ -1,7 +1,7 @@
 /**
  * 노드 클래스 정의
  */
-package graphs;
+package graphs.core;
 
 public class Vertex {
   final private String id;

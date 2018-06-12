@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import graphs.algo.Dijkstra;
+import graphs.core.Edge;
+import graphs.core.Vertex;
+
 public class ShortestPathMain {
 
   public static void main(String args[]) {

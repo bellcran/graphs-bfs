@@ -1,12 +1,15 @@
 /**
  *  유향그래프 너비우선탐색 구현 (Direct Graph, BFS)
  */
-package graphs;
+package graphs.algo;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
+
+import graphs.TraceGraph;
+import graphs.core.Edge;
 
 public class BFS {
 

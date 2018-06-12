@@ -7,7 +7,11 @@ package graphs;
 import java.io.*;
 import java.util.*;
 
-class TraceGraph {
+import graphs.core.Edge;
+import graphs.core.Vertex;
+import graphs.util.GraphPrint;
+
+public class TraceGraph {
   private int V = 0; // 노드 수
   private int E = 0; // 연결(링크) 수
   private LinkedList<Integer> adj[]; // 인접노드 리스트
@@ -22,7 +26,7 @@ class TraceGraph {
    * 노드 인덱스값과 배열의 인덱스값은 같다.
    * @param v : 전체 노드 수
    */
-  TraceGraph(int v) {
+  public TraceGraph(int v) {
     V = v;
     adj = new LinkedList[v];
     terminalYn = new boolean[v];
@@ -43,7 +47,7 @@ class TraceGraph {
    * 링크를 가지고 탐색에 사용할 그래프를 생성한다.
    * @param edges
    */
-  TraceGraph(List<Edge> edges) {
+  public TraceGraph(List<Edge> edges) {
     // 링크 정보를 가지고 노드를 생성한다.
     this.edges = edges;
     this.vertexes = new HashMap<Integer, Vertex>();

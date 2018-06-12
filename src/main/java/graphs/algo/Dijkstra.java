@@ -1,7 +1,7 @@
 /**
  * 다익스트라 알고리즘
  */
-package graphs;
+package graphs.algo;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -11,6 +11,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import graphs.ShortestPathGraph;
+import graphs.core.Edge;
+import graphs.core.Vertex;
 
 public class Dijkstra {
 

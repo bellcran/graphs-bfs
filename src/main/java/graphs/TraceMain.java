@@ -9,6 +9,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import graphs.algo.BFS;
+import graphs.core.Edge;
+import graphs.core.Vertex;
+
 public class TraceMain {
 
   public static void main(String args[]) {
@@ -46,7 +50,7 @@ public class TraceMain {
     TraceGraph g = new TraceGraph(edges);
 
     // 터미널노드를 셋팅한다.
-    g.setTerminalYn(new Vertex[] {g.getVertex(4), g.getVertex(5)});
+    //g.setTerminalYn(new Vertex[] {g.getVertex(4), g.getVertex(5)});
 
     // 유향그래프에 탐색로직(BFS)을 적용한다.
     BFS bfs = new BFS(g);

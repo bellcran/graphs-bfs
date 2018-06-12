@@ -8,6 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import graphs.core.Edge;
+import graphs.core.Vertex;
+import graphs.util.GraphPrint;
+
 public class ShortestPathGraph {
   private final Map<Integer, Vertex> vertexes;
   private final List<Edge> edges;

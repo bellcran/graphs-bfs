@@ -1,7 +1,7 @@
 /**
  * 링크 클래스 정의
  */
-package graphs;
+package graphs.core;
 
 public class Edge {
   private final String id;
