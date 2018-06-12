@@ -46,10 +46,7 @@ public class TraceMain {
     TraceGraph g = new TraceGraph(edges);
 
     // 터미널노드를 셋팅한다.
-    // g.setTerminalYn(new Vertex[] {g.getVertex(4), g.getVertex(5)});
-
-    // System.out.println("==> 유향그래프 원본 출력");
-    // System.out.println(g);
+    //g.setTerminalYn(new Vertex[] {g.getVertex(4), g.getVertex(5)});
 
     // 유향그래프에 탐색로직(BFS)을 적용한다.
     BFS bfs = new BFS(g);
@@ -57,14 +54,11 @@ public class TraceMain {
     bfs.execute(2);
     //bfs.execute(3);
 
-    // 탐색이 끝난 유향그래프를 얻는다.
-    // TraceGraph bfsGraph = bfs.getGraph();
-
-    // 이진트리형태로 출력한다.
+    // 원본 노드를 이진트리형태로 출력한다.
     g.print();
     
     // 탐색이 끝난 경로 (tracking 경로) 출력 (링크정보)
-    System.out.println("==> 탐색이 끝난 경로 출력 (링크정보)");
+    System.out.println("==> 탐색이 끝난 경로의 링크정보를 출력");
     List<Edge> path = bfs.getPath();
 
     for (Edge edge : path) {
@@ -72,11 +66,20 @@ public class TraceMain {
     }
     System.out.println();
     
+    // 탐색이 끝난 경로를 이진트리형태로 출력한다.
     TraceGraph tg = new TraceGraph(path);
     tg.print();
 
+    
+    
     // 기타 함수 테스트
 
+    //System.out.println("==> 유향그래프 원본 출력");
+    //System.out.println(g);
+
+    // 탐색이 끝난 유향그래프를 얻는다.
+    // TraceGraph bfsGraph = bfs.getGraph();
+    
     // 유향그래프 탐색 결과 출력 (탐색노드, 거리, 선행노드)
     // System.out.println("==> 유향그래프 탐색 결과 출력 (탐색노드, 거리, 선행노드)");
     // System.out.println(bfs);

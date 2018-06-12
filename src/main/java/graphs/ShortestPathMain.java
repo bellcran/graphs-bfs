@@ -32,15 +32,20 @@ public class ShortestPathMain {
     // 그래프에 최단거리 분석 로직을 적용한다.
     Dijkstra dijkstra = new Dijkstra(graph);
     // 시작노드를 설정해서 거리를 구한다.
-    dijkstra.execute(3);
+    int from = 0;
+    //int from = 3;
+    dijkstra.execute(from);
     // 지정노드까지 최단경로를 구하여 출력 (노드정보)
-    LinkedList<Vertex> path = dijkstra.getPath(10);
+    int to = 10;
+    LinkedList<Vertex> path = dijkstra.getPath(to);
     
+    // 원본노드를 이진트리형태로 출력한다.
     graph.print();
     
-    System.out.println("==> 지정노드까지 최단경로 출력 (노드정보)");
+    System.out.println("==> 지정노드까지 최단경로를 출력한다.");
     for (Vertex vertex : path) {
-      System.out.print(vertex + " -> ");
+      System.out.print(vertex);
+      if (vertex.getIndex() != to)System.out.print(" -> ");
       //System.out.println(dijkstra.getShortestDistance(vertex));
     }
 
