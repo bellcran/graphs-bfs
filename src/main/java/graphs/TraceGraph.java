@@ -80,7 +80,6 @@ class TraceGraph {
     }
     
     for(int j = 0; j < adj.length; j++) {
-      
       if (adj[j] != null) {
         for(int k=0; k<adj[j].size(); k++) {
           int ch = adj[j].get(k);
@@ -243,12 +242,6 @@ class TraceGraph {
         } else {
           parent = tn.get(key);
         }
-        /*for (int j=0; j<adj[i].size(); j++) {
-          String childKey = vertexes.get(adj[i].get(j)).getId();
-          GraphPrint child = new GraphPrint(childKey, false);
-          parent.addChild(child);
-          tn.put(childKey, child);
-        }*/
         
         for (int j=0; j<adj[i].size(); j++) {
           String childKey = vertexes.get(adj[i].get(j)).getId();
